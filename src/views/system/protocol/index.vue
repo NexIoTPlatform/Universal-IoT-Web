@@ -290,44 +290,50 @@ export default {
         {
           title: 'ProductKey',
           dataIndex: 'id',
+          width: '20%',
           ellipsis: true,
-          align: 'center'
+          align: 'left'
         },
         {
           title: '协议名',
           dataIndex: 'name',
+          width: '20%',
           ellipsis: true,
-          align: 'center'
+          align: 'left'
         },
         {
           title: '类型',
           dataIndex: 'type',
-          scopedSlots: {customRender: 'protocolType'},
+          width: '10%',
+          scopedSlots: { customRender: 'protocolType' },
           align: 'center'
         },
         {
           title: '内置编码',
           dataIndex: 'innerType',
-          scopedSlots: {customRender: 'type'},
+          width: '10%',
+          scopedSlots: { customRender: 'type' },
           align: 'center'
         },
         {
           title: '描述',
           dataIndex: 'description',
-          scopedSlots: {customRender: 'description'},
-          align: 'center'
+          width: '10%',
+          scopedSlots: { customRender: 'description' },
+          align: 'left'
         },
         {
           title: '状态',
           dataIndex: 'state',
-          scopedSlots: {customRender: 'protocolState'},
+          width: '10%',
+          scopedSlots: { customRender: 'protocolState' },
           align: 'center'
         },
         {
           title: '操作',
           dataIndex: 'operation',
-          width: '18%',
-          scopedSlots: {customRender: 'operation'},
+          width: '20%',
+          scopedSlots: { customRender: 'operation' },
           align: 'center'
         }
       ]
@@ -521,4 +527,6 @@ export default {
 .operation-buttons .ant-btn .anticon {
   font-size: 12px;
 }
+
+
 </style>
