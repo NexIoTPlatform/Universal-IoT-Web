@@ -55,11 +55,11 @@
               Kafka
               <span v-if="!getPushMethodSupport('Kafka')" class="dev-tag">(开发中)</span>
             </a-select-option>
-            <a-select-option value="MQTT" :disabled="!getPushMethodSupport('MQTT')">
+            <!-- <a-select-option value="MQTT" :disabled="!getPushMethodSupport('MQTT')">
               <a-icon type="wifi"/>
               MQTT
               <span v-if="!getPushMethodSupport('MQTT')" class="dev-tag">(开发中)</span>
-            </a-select-option>
+            </a-select-option> -->
             <a-select-option value="JDBC" :disabled="!getPushMethodSupport('JDBC')">
               <a-icon type="database"/>
               JDBC插入
@@ -500,7 +500,10 @@ export default {
 
       // 根据字典配置动态构建配置
       if (this.pushMethod === 'HTTP' && this.getPushMethodSupport('HTTP')) {
-        config.http = {}
+        // 保留原有配置，避免覆盖 enable 和 support 等字段
+        if (!config.http) {
+          config.http = {}
+        }
         this.getPushFields('HTTP').forEach(field => {
           const value = this.form[this.getFieldPath(field.dictValue, 'HTTP')]
           if (value !== undefined && value !== null && value !== '') {
@@ -510,7 +513,10 @@ export default {
       }
 
       if (this.pushMethod === 'RocketMQ' && this.getPushMethodSupport('RocketMQ')) {
-        config.rocketMQ = {}
+        // 保留原有配置，避免覆盖 enable 和 support 等字段
+        if (!config.rocketMQ) {
+          config.rocketMQ = {}
+        }
         this.getPushFields('RocketMQ').forEach(field => {
           const value = this.form[this.getFieldPath(field.dictValue, 'RocketMQ')]
           if (value !== undefined && value !== null && value !== '') {
@@ -520,7 +526,10 @@ export default {
       }
 
       if (this.pushMethod === 'Kafka' && this.getPushMethodSupport('Kafka')) {
-        config.kafka = {}
+        // 保留原有配置，避免覆盖 enable 和 support 等字段
+        if (!config.kafka) {
+          config.kafka = {}
+        }
         this.getPushFields('Kafka').forEach(field => {
           const value = this.form[this.getFieldPath(field.dictValue, 'Kafka')]
           if (value !== undefined && value !== null && value !== '') {
@@ -530,7 +539,10 @@ export default {
       }
 
       if (this.pushMethod === 'MQTT' && this.getPushMethodSupport('MQTT')) {
-        config.mqtt = {}
+        // 保留原有配置，避免覆盖 enable 和 support 等字段
+        if (!config.mqtt) {
+          config.mqtt = {}
+        }
         this.getPushFields('MQTT').forEach(field => {
           const value = this.form[this.getFieldPath(field.dictValue, 'MQTT')]
           if (value !== undefined && value !== null && value !== '') {
@@ -540,7 +552,10 @@ export default {
       }
 
       if (this.pushMethod === 'JDBC' && this.getPushMethodSupport('JDBC')) {
-        config.jdbc = {}
+        // 保留原有配置，避免覆盖 enable 和 support 等字段
+        if (!config.jdbc) {
+          config.jdbc = {}
+        }
         this.getPushFields('JDBC').forEach(field => {
           const value = this.form[this.getFieldPath(field.dictValue, 'JDBC')]
           if (value !== undefined && value !== null && value !== '') {
@@ -742,7 +757,7 @@ export default {
     loadPushFields() {
       const dictArray = [
         'app_push_http',
-        'app_push_mqtt',
+        // 'app_push_mqtt',
         'app_push_rocketmq',
         'app_push_kafka',
         'app_push_jdbc'
@@ -750,7 +765,7 @@ export default {
 
       return this.getDictMap(dictArray).then(res => {
         this.pushFields.HTTP = res.data['app_push_http'] || []
-        this.pushFields.MQTT = res.data['app_push_mqtt'] || []
+        // this.pushFields.MQTT = res.data['app_push_mqtt'] || []
         this.pushFields.RocketMQ = res.data['app_push_rocketmq'] || []
         this.pushFields.Kafka = res.data['app_push_kafka'] || []
         this.pushFields.JDBC = res.data['app_push_jdbc'] || []
@@ -829,7 +844,7 @@ export default {
         'HTTP': true, // HTTP推送已支持
         'RocketMQ': false, // RocketMQ开发中
         'Kafka': false, // Kafka开发中
-        'MQTT': false, // MQTT开发中
+        // 'MQTT': false, // MQTT开发中
         'JDBC': false // JDBC开发中
       }
 
@@ -858,10 +873,8 @@ export default {
             {dictLabel: '推送密钥', dictValue: 'secret'},
             {dictLabel: '消息头', dictValue: 'header'}
           ],
-          'app_push_mqtt': [
-            {dictLabel: 'MQTT地址', dictValue: 'url'},
-            {dictLabel: '主题', dictValue: 'topic'}
-          ],
+          // 'app_push_mqtt': [
+          // ],
           'app_push_rocketmq': [
             {dictLabel: 'NameServer地址', dictValue: 'namesrvAddr'},
             {dictLabel: '主题', dictValue: 'topic'},
