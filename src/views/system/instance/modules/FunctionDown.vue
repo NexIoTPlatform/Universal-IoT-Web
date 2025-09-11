@@ -55,7 +55,7 @@
               </a-form-model-item>
             </template>
             <template
-              v-else-if="item.valueType !== undefined && item.valueType !== null && item.valueType.type === 'float'">
+              v-else-if="item.valueType !== undefined && item.valueType !== null && (item.valueType.type === 'float'||item.valueType.type === 'double')">
               <a-form-model-item
                 :key="index"
                 :prop="item.id"
@@ -449,7 +449,7 @@ export default {
     },
     // 下发功能发生改变
     optionChange(value, option) {
-      if (this.source === 'ctwing') {
+      if (this.source === 'ctaiot') {
         this.sourceShow = true
       } else {
         this.sourceShow = false
@@ -460,7 +460,6 @@ export default {
       console.log('option event = ', option)
       this.functionFrom = {
         function: value,
-
         childDeviceId: undefined,
         deviceId: undefined,
         meterNo: undefined,
@@ -473,10 +472,6 @@ export default {
             console.log('item.id = ', item.id)
             // 初始化参数项
             this.functionParams = item.inputs
-            // 初始化 form
-            // item.inputs.forEach(item => {
-            //   this.functionFrom[item.id] = undefined
-            // })
             this.functionParams.forEach(item => {
               if (item.id === 'childDeviceId' ||
                 item.id === 'deviceId' ||
@@ -484,7 +479,7 @@ export default {
                 this.functionFrom[item.id] = this.deviceNo
               } else if (item.id === 'meterNo' ||
                 item.id === 'imei') {
-                this.functionFrom[item.id] = JSON.parse(this.configration)[item.id]
+                this.functionFrom[item.id] = JSON.parse(this.configration)[item.id] || this.deviceNo
               }
             })
             console.log('this.functionFrom = ', this.functionFrom, this.functionParams)

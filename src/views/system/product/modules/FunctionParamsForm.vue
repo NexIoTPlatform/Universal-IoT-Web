@@ -116,9 +116,9 @@
       </a-form-model-item>
       <a-form-model-item
         label="描述"
-        prop="describe">
+        prop="description">
         <a-textarea
-          v-model="form.describe"
+          v-model="form.description"
           placeholder="参数描述信息"
           :auto-size="{ minRows: 3, maxRows: 5 }"
         />
@@ -181,7 +181,7 @@ export default {
         length: undefined,
         minRange: undefined,
         maxRange: undefined,
-        describe: undefined,
+        description: undefined,
         enum: [{
           value: undefined,
           text: undefined
@@ -261,7 +261,7 @@ export default {
         length: undefined,
         minRange: undefined,
         maxRange: undefined,
-        describe: undefined,
+        description: undefined,
         enum: [{
           value: undefined,
           text: undefined
